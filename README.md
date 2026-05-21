@@ -2,7 +2,7 @@
 
 A custom widget for [ArcGIS Experience Builder](https://www.esri.com/en-us/arcgis/products/arcgis-experience-builder/overview) that displays map coordinates in real time or on click, with support for multiple coordinate systems and on-the-fly format switching.
 
-Based on the original [Coordinates widget](https://github.com/Esri/solutions-components) by Esri, extended by [EsriBeLux](https://www.esri.be/) (Vincent Swerts) and further modified to add runtime format selection.
+Based on the original [Coordinates widget](https://github.com/Esri/solutions-components) by Esri, and further modified to add runtime format selection.
 
 ---
 
