@@ -61,6 +61,7 @@ Open the widget settings panel in build mode:
 | **Thousand separators** | Toggle digit grouping |
 | **Display order** | Longitude/Latitude (X, Y) or Latitude/Longitude (Y, X) |
 | **Default coordinate format** | Format shown to end users on first load: DD, DDM, DMS, MGRS, USNG, UTM, or Long/Lat (default: DD) |
+| **Show coordinate system selector** | Toggle the CRS dropdown arrow in the runtime widget (default: on) |
 
 ### Adding a coordinate system
 

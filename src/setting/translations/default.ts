@@ -24,5 +24,6 @@ export default {
   invalidWkidTips: 'Please enter a valid coordinate system WKID.',
   invalidDatumWkidTips: 'Please enter a valid datum transformation ID.',
   useTransformationForward: 'Use transform forward',
-  defaultDisplayFormat: 'Default coordinate format'
+  defaultDisplayFormat: 'Default coordinate format',
+  showSystemSelector: 'Show coordinate system selector'
 }

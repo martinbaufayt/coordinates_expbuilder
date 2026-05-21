@@ -36,7 +36,7 @@ const Setting = (props: SettingProps): React.ReactElement => {
     config: propConfig,
     useMapWidgetIds
   } = props
-  const { coordinateSystem, showSeparators, coordinateDecimal, altitudeDecimal, displayOrder, widgetStyle, defaultDisplayFormat, mapInfo, mapInfo2 } = propConfig
+  const { coordinateSystem, showSeparators, coordinateDecimal, altitudeDecimal, displayOrder, widgetStyle, defaultDisplayFormat, showSystemSelector, mapInfo, mapInfo2 } = propConfig
   const sidePopperTrigger = useRef<HTMLDivElement>(null)
   // state
   const [showLayerPanel, setShowLayerPanel] = useState(false)
@@ -62,6 +62,7 @@ const Setting = (props: SettingProps): React.ReactElement => {
   const loLaMode = translate('loLaMode')
   const laLoMode = translate('laLoMode')
   const defaultDisplayFormatLabel = translate('defaultDisplayFormat')
+  const showSystemSelectorLabel = translate('showSystemSelector')
   const selectMapHint = translate('selectMapHint')
   const widgetStyleLabel = translate('style')
   // global variable
@@ -527,6 +528,13 @@ const Setting = (props: SettingProps): React.ReactElement => {
                 <option value='UTM'>UTM — Universal Transverse Mercator</option>
                 <option value='LON_LAT'>Long/Lat — Labeled Decimal Degrees</option>
               </Select>
+            </SettingRow>
+            <SettingRow tag='label' label={showSystemSelectorLabel}>
+              <Switch
+                className='can-x-switch'
+                checked={showSystemSelector !== false}
+                onChange={evt => { onPropertyChange('showSystemSelector', evt.target.checked) }}
+              />
             </SettingRow>
           </SettingSection>
         </Fragment>

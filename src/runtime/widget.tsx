@@ -33,7 +33,7 @@ const { useState, useEffect, useRef } = React
 
 const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   const { config, useMapWidgetIds, theme, id, layoutId, layoutItemId, controllerWidgetId } = props
-  const { coordinateSystem, coordinateDecimal, altitudeDecimal, showSeparators, displayOrder, widgetStyle, mapInfo, mapInfo2 } = config
+  const { coordinateSystem, coordinateDecimal, altitudeDecimal, showSeparators, displayOrder, widgetStyle, showSystemSelector, mapInfo, mapInfo2 } = config
   const useMapWidgetId = useMapWidgetIds?.[0]
   const isControlMapWidget = ReactRedux.useSelector((state: IMState) => state.mapWidgetsInfo[useMapWidgetId]?.autoControlWidgetId === id)
   const widgetSizeAuto = ReactRedux.useSelector((state: IMState) => {
@@ -511,7 +511,8 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   const displayLonLat = (point: any) => {
     const lon = point.longitude ?? point.x
     const lat = point.latitude ?? point.y
-    setGeoInfo(`Lon: ${toFormat(lon)}° Lat: ${toFormat(lat)}°`)
+    const fmt = (n) => localizeNumberBySettingInfo(n, { places: coordinateDecimal, digitSeparator: showSeparators })
+    setGeoInfo(`Lon: ${fmt(lon)}° Lat: ${fmt(lat)}°`)
   }
 
   const handleFormatChange = (format: string) => {
@@ -547,7 +548,8 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
       orderXy ? setGeoInfo(`${x} ${y}`) : setGeoInfo(`${y} ${x}`)
     } else {
       const nlsUnit = unitToNls(unit)
-      orderXy ? setGeoInfo(`${toFormat(x)} ${toFormat(y)} ${nlsUnit}`) : setGeoInfo(`${toFormat(y)} ${toFormat(x)} ${nlsUnit}`)
+      const fmtDeg = (n) => localizeNumberBySettingInfo(n, { places: coordinateDecimal, digitSeparator: showSeparators })
+      orderXy ? setGeoInfo(`${fmtDeg(x)} ${fmtDeg(y)} ${nlsUnit}`) : setGeoInfo(`${fmtDeg(y)} ${fmtDeg(x)} ${nlsUnit}`)
     }
   }
 
@@ -967,7 +969,7 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   const isDefaultTips = infoTipsArr.includes(classicInfo)
   const classicCopyDisable = enableRealtime || isDefaultTips || (!locateActive && !geoInfo)
   const modernCopyDisable = enableRealtime || isDefaultTips || (!locateActive && !classicInfo.trim())
-  const hasSystem = coordinateSystem?.length > 0
+  const hasSystem = coordinateSystem?.length > 0 && showSystemSelector !== false
 
   return (
     <div className='jimu-widget-coordinates jimu-widget h-100' ref={coordinatesWidgetConRef} css={getStyle(theme, isClassic, widgetRect, widgetSizeAuto)}>

@@ -52,6 +52,7 @@ export interface Config {
   displayOrder: DisplayOrderType
   widgetStyle: WidgetStyleType
   defaultDisplayFormat?: string
+  showSystemSelector?: boolean
   mapInfo?: MapInfo
   mapInfo2?: MapInfo
 }
