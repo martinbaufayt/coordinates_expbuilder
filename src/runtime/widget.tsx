@@ -57,7 +57,7 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   const [showTips, setShowTips] = useState(false)
   const [showMouseTips, setShowMouseTips] = useState(false)
   const [geoInfo, setGeoInfo] = useState('')
-  const [selectedDisplayFormat, setSelectedDisplayFormat] = useState('')
+  const [selectedDisplayFormat, setSelectedDisplayFormat] = useState(config.defaultDisplayFormat || 'DECIMAL_DEGREES')
 
   const [elevInfo, setElevInfo] = useState('')
   const [elevNum, setElevNum] = useState(null)
@@ -131,7 +131,6 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   }
 
   const formatOptions = [
-    { value: '', label: 'Auto' },
     { value: 'DECIMAL_DEGREES', label: 'DD' },
     { value: 'DEGREES_DECIMAL_MINUTES', label: 'DDM' },
     { value: 'DEGREE_MINUTE_SECONDS', label: 'DMS' },
@@ -140,7 +139,7 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
     { value: 'UTM', label: 'UTM' },
     { value: 'LON_LAT', label: 'Long/Lat' }
   ]
-  const currentFormatLabel = formatOptions.find(f => f.value === selectedDisplayFormat)?.label ?? 'Auto'
+  const currentFormatLabel = formatOptions.find(f => f.value === selectedDisplayFormat)?.label ?? 'DD'
   const unitAbbrMap = {
     [unitKilometers]: translate('kilometerAbbr'),
     [unitMeters]: translate('meterAbbr'),
@@ -188,7 +187,7 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
       }
     }
   }, [currentJimuMapView, locateActive, enableRealtime, selectedSystemId,
-    coordinateSystem, coordinateDecimal, altitudeDecimal, showSeparators, displayOrder])
+    coordinateSystem, coordinateDecimal, altitudeDecimal, showSeparators, displayOrder, selectedDisplayFormat])
 
   useEffect(() => {
     graphicsLayer.current = new GraphicsLayer({ listMode: 'hide' })

@@ -51,6 +51,7 @@ export interface Config {
   showSeparators: boolean
   displayOrder: DisplayOrderType
   widgetStyle: WidgetStyleType
+  defaultDisplayFormat?: string
   mapInfo?: MapInfo
   mapInfo2?: MapInfo
 }

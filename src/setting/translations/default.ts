@@ -23,5 +23,6 @@ export default {
   elevMile: 'Imperial',
   invalidWkidTips: 'Please enter a valid coordinate system WKID.',
   invalidDatumWkidTips: 'Please enter a valid datum transformation ID.',
-  useTransformationForward: 'Use transform forward'
+  useTransformationForward: 'Use transform forward',
+  defaultDisplayFormat: 'Default coordinate format'
 }

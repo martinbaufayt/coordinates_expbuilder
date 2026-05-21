@@ -60,6 +60,7 @@ Open the widget settings panel in build mode:
 | **Decimal places** | Separate precision settings for coordinates and altitude |
 | **Thousand separators** | Toggle digit grouping |
 | **Display order** | Longitude/Latitude (X, Y) or Latitude/Longitude (Y, X) |
+| **Default coordinate format** | Format shown to end users on first load: DD, DDM, DMS, MGRS, USNG, UTM, or Long/Lat (default: DD) |
 
 ### Adding a coordinate system
 

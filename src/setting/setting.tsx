@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { React, jsx, Immutable, defaultMessages as jimuCoreMessages, urlUtils, moduleLoader, hooks } from 'jimu-core'
 import { type AllWidgetSettingProps, builderAppSync, getAppConfigAction } from 'jimu-for-builder'
-import { Button, defaultMessages as jimuMessages, Icon, Label, NumericInput, Radio, Switch, Tooltip } from 'jimu-ui'
+import { Button, defaultMessages as jimuMessages, Icon, Label, NumericInput, Radio, Select, Switch, Tooltip } from 'jimu-ui'
 import { MapWidgetSelector, SettingRow, SettingSection, SidePopper } from 'jimu-ui/advanced/setting-components'
 import { type CoordinateConfig, DisplayOrderType, ElevationUnitType, type IMConfig, WidgetStyleType } from '../config'
 import defaultMessages from './translations/default'
@@ -36,7 +36,7 @@ const Setting = (props: SettingProps): React.ReactElement => {
     config: propConfig,
     useMapWidgetIds
   } = props
-  const { coordinateSystem, showSeparators, coordinateDecimal, altitudeDecimal, displayOrder, widgetStyle, mapInfo, mapInfo2 } = propConfig
+  const { coordinateSystem, showSeparators, coordinateDecimal, altitudeDecimal, displayOrder, widgetStyle, defaultDisplayFormat, mapInfo, mapInfo2 } = propConfig
   const sidePopperTrigger = useRef<HTMLDivElement>(null)
   // state
   const [showLayerPanel, setShowLayerPanel] = useState(false)
@@ -61,6 +61,7 @@ const Setting = (props: SettingProps): React.ReactElement => {
   const displayOrderLabel = translate('displayOrder')
   const loLaMode = translate('loLaMode')
   const laLoMode = translate('laLoMode')
+  const defaultDisplayFormatLabel = translate('defaultDisplayFormat')
   const selectMapHint = translate('selectMapHint')
   const widgetStyleLabel = translate('style')
   // global variable
@@ -510,6 +511,22 @@ const Setting = (props: SettingProps): React.ReactElement => {
                   {laLoMode}
                 </Label>
               </div>
+            </SettingRow>
+            <SettingRow flow='wrap' label={defaultDisplayFormatLabel}>
+              <Select
+                size='sm'
+                value={defaultDisplayFormat || 'DECIMAL_DEGREES'}
+                onChange={(e) => { onPropertyChange('defaultDisplayFormat', e.target.value) }}
+                aria-label={defaultDisplayFormatLabel}
+              >
+                <option value='DECIMAL_DEGREES'>DD — Decimal Degrees</option>
+                <option value='DEGREES_DECIMAL_MINUTES'>DDM — Degrees Decimal Minutes</option>
+                <option value='DEGREE_MINUTE_SECONDS'>DMS — Degrees Minutes Seconds</option>
+                <option value='MGRS'>MGRS — Military Grid Reference System</option>
+                <option value='USNG'>USNG — US National Grid</option>
+                <option value='UTM'>UTM — Universal Transverse Mercator</option>
+                <option value='LON_LAT'>Long/Lat — Labeled Decimal Degrees</option>
+              </Select>
             </SettingRow>
           </SettingSection>
         </Fragment>
