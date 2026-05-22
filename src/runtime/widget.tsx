@@ -969,7 +969,8 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
   const isDefaultTips = infoTipsArr.includes(classicInfo)
   const classicCopyDisable = enableRealtime || isDefaultTips || (!locateActive && !geoInfo)
   const modernCopyDisable = enableRealtime || isDefaultTips || (!locateActive && !classicInfo.trim())
-  const hasSystem = coordinateSystem?.length > 0 && showSystemSelector !== false
+  const hasSystem = coordinateSystem?.length > 0
+  const showSystemDropdown = hasSystem && showSystemSelector !== false
 
   return (
     <div className='jimu-widget-coordinates jimu-widget h-100' ref={coordinatesWidgetConRef} css={getStyle(theme, isClassic, widgetRect, widgetSizeAuto)}>
@@ -1015,7 +1016,7 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
               ))}
             </DropdownMenu>
           </Dropdown>
-          {hasSystem &&
+          {showSystemDropdown &&
             <Dropdown size='sm' activeIcon>
               <DropdownButton
                 arrow={false}
@@ -1085,7 +1086,7 @@ const Widget = (props: AllWidgetProps<IMConfig>): React.ReactElement => {
                     ))}
                   </DropdownMenu>
                 </Dropdown>
-                {hasSystem &&
+                {showSystemDropdown &&
                   <Dropdown size='sm' activeIcon>
                     <DropdownButton
                       arrow={false}
